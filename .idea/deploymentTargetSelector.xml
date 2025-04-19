@@ -4,6 +4,15 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-04-17T23:31:45.051187Z">
+          <Target type="BOOT_WITH_SNAPSHOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/davidelamanna/.android/avd/Pixel_8_API_35.avd" />
+            </handle>
+            <Snapshot name="snap_2025-02-19_00-43-57" path="$USER_HOME$/.android/avd/Pixel_8_API_35.avd/snapshots/snap_2025-02-19_00-43-57" />
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>
