@@ -20,6 +20,10 @@ import com.example.myaigenhelper.features.search.data.AISearch
 import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.expandedBottomSheetState
 import com.example.myaigenhelper.features.search.ui.SearchItemView
+import com.example.myaigenhelper.ui.styles.chatGptColorList
+import com.example.myaigenhelper.ui.styles.deepSeekColorList
+import com.example.myaigenhelper.ui.styles.geminiColorList
+import com.example.myaigenhelper.ui.styles.grokColorList
 import com.example.myaigenhelper.ui.theme.BlueGray800
 import com.example.myaigenhelper.ui.theme.BlueGray900
 import com.example.myaigenhelper.ui.theme.DeepPurpleA400
@@ -74,16 +78,16 @@ fun AISearchingScreenView() {
                 showingModalBottomSheet.value = false
             },
             hasStatusBarPaddingHandled = true,
-            containerColor = when (selectedItem.value?.id) {
-                AISearchTypeEnum.GEMINI -> DeepPurpleA400
+            containerColorList = when (selectedItem.value?.id) {
+                AISearchTypeEnum.GEMINI -> geminiColorList
 
-                AISearchTypeEnum.CHATGPT -> Gray900
+                AISearchTypeEnum.CHATGPT -> chatGptColorList
 
-                AISearchTypeEnum.GROK -> BlueGray800
+                AISearchTypeEnum.GROK -> grokColorList
 
-                AISearchTypeEnum.DEEPSEEK -> Shadow11
+                AISearchTypeEnum.DEEPSEEK -> deepSeekColorList
 
-                else -> BlueGray900
+                else -> listOf(BlueGray900)
             },
             hasDragHandle = true,
         ) {

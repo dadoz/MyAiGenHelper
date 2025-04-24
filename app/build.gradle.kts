@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
-
 android {
     namespace = "com.example.myaigenhelper"
     compileSdk = 35
@@ -66,9 +65,11 @@ dependencies {
 
     // chatgpt
     implementation(libs.openai.java)
-
     // gemini
+
     // tbd
+    implementation(libs.font.awesome.android)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

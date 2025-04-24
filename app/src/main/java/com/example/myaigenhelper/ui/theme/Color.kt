@@ -325,3 +325,17 @@ val Shadow3 = Color(0xff9b86fa)
 val Shadow2 = Color(0xffc8bbfd)
 val Shadow1 = Color(0xffded6fe)
 val Shadow0 = Color(0xfff4f2ff)
+
+//gemini
+val GeminiBlue = Color(0xff4796E3)
+val GeminiBlueDark = Color(0xFF4F5970)
+val GeminiViolet = Color(0xff9177C7)
+val GeminiVioletDark = Color(0xFF5A5273)
+val GeminiFucsia = Color(0xffCA6673)
+val GeminiFucsiaDark = Color(0xFF704E56)
+
+val DeepSeek1 = Color(0xff003366)
+val DeepSeek2 = Color(0xff228b22)
+val DeepSeek3 = Color(0xff800020)
+val DeepSeek4 = Color(0xff008080)
+val DeepSeek5 = Color(0xffff4500)

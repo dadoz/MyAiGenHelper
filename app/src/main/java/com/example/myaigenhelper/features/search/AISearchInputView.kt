@@ -1,10 +1,19 @@
 package com.example.myaigenhelper.features.search
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.EaseInOut
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,15 +28,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +51,12 @@ import com.example.myaigenhelper.R
 import com.example.myaigenhelper.features.search.helper.modalImeAndStatusBarPadding
 import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
+import com.example.myaigenhelper.ui.styles.angleCircleAnimated
+import com.example.myaigenhelper.ui.styles.multicolorBackgroundAnimated
+import compose.icons.AllIcons
+import compose.icons.FontAwesomeIcons
+import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 const val densityResizeFactor = .9f
 
@@ -47,11 +66,29 @@ fun ModalBottomSheetView(
     modifier: Modifier = Modifier,
     bottomSheetState: SheetState,
     hasStatusBarPaddingHandled: Boolean = true,
-    containerColor: Color = Color.Red,
+    containerColorList: List<Color> = listOf(Color.Blue),
     onCloseCallback: () -> Unit,
     hasDragHandle: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val animationTimestamp = remember { mutableLongStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(key1 = animationTimestamp.longValue) {
+        delay(1000)
+        animationTimestamp.longValue = System.currentTimeMillis()
+    }
+
+    val isAnimated by remember { mutableStateOf(false) }
+    val animatedColor by animateColorAsState(
+        targetValue = containerColorList
+            .let { colors ->
+                colors[Random(animationTimestamp.longValue).nextInt(0, colors.size)]
+            },
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
     ModalBottomSheet(
         modifier = modifier
             .modalImeAndStatusBarPadding(
@@ -59,8 +96,7 @@ fun ModalBottomSheetView(
             ),
         sheetState = bottomSheetState,
         onDismissRequest = onCloseCallback,
-        containerColor = containerColor,
-//            shape = wevBottomSheetRoundedCornerShape(),
+        containerColor = animatedColor,
         dragHandle = {
             if (hasDragHandle) {
                 DragHandle()
@@ -122,6 +158,8 @@ fun AISearchInputView(
             }
         )
     }
+    val icon = remember { FontAwesomeIcons.AllIcons.take(10) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -159,6 +197,10 @@ fun AISearchInputView(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
             ) {
+//                Icon(
+//                    imageVector = icon[2],
+//                    contentDescription = ""
+//                )
                 Text(text = stringResource(R.string.action_go))
             }
         }
@@ -183,6 +225,38 @@ fun AISearchInputView(
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 )
+        }
+    }
+}
+
+@Composable
+fun SampleBackgroundAnimated() {
+    val colorBg = Color(0xFF2C3141)
+    val angle by angleCircleAnimated()
+    val colors =
+        listOf(
+            Color(0xFFFF595A),
+            Color(0xFFFFC766),
+            Color(0xFF35A07F),
+            Color(0xFF35A07F),
+            Color(0xFFFFC766),
+            Color(0xFFFF595A)
+        )
+
+    val brush = multicolorBackgroundAnimated(colors = colors)
+    Canvas(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .background(colorBg)
+    ) {
+
+        rotate(degrees = angle) {
+            drawCircle(
+                brush = brush,
+                radius = size.width,
+                blendMode = BlendMode.SrcIn,
+            )
         }
     }
 }
