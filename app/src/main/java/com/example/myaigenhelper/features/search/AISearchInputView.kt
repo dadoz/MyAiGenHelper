@@ -10,7 +10,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,13 +47,13 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myaigenhelper.R
+import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.modalImeAndStatusBarPadding
 import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
 import com.example.myaigenhelper.ui.styles.angleCircleAnimated
 import com.example.myaigenhelper.ui.styles.multicolorBackgroundAnimated
-import compose.icons.AllIcons
-import compose.icons.FontAwesomeIcons
+import com.example.myaigenhelper.ui.theme.BlueGray900
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
@@ -76,8 +75,6 @@ fun ModalBottomSheetView(
         delay(1000)
         animationTimestamp.longValue = System.currentTimeMillis()
     }
-
-    val isAnimated by remember { mutableStateOf(false) }
     val animatedColor by animateColorAsState(
         targetValue = containerColorList
             .let { colors ->
@@ -128,7 +125,8 @@ fun Density.getResizedDensity() = when {
 @Composable
 fun AISearchInputView(
     modifier: Modifier = Modifier,
-    aiSearchViewModel: AISearchViewModel = viewModel()
+    aiSearchViewModel: AISearchViewModel = viewModel(),
+    selectedItemType: AISearchTypeEnum
 ) {
     val uiState by aiSearchViewModel.uiState.collectAsState()
     val placeholderPrompt = stringResource(R.string.prompt_placeholder)
@@ -158,51 +156,67 @@ fun AISearchInputView(
             }
         )
     }
-    val icon = remember { FontAwesomeIcons.AllIcons.take(10) }
+//    val icon = remember { FontAwesomeIcons.AllIcons.take(10) }
 
     Column(
         modifier = modifier
             .fillMaxSize()
+            .padding(all = 16.dp)
     ) {
+        TextField(
+            modifier = Modifier
+                .padding(end = 16.dp)
+                .align(Alignment.CenterHorizontally),
+            value = prompt,
+            label = {
+                Text(stringResource(R.string.label_prompt))
+            },
+            onValueChange = { prompt = it },
+            minLines = 10,
+        )
 
-        Row(
-            modifier = Modifier.padding(all = 16.dp)
-        ) {
-            TextField(
-                value = prompt,
-                label = { Text(stringResource(R.string.label_prompt)) },
-                onValueChange = { prompt = it },
-                modifier = Modifier
-                    .weight(0.8f)
-                    .padding(end = 16.dp)
-                    .align(Alignment.CenterVertically)
-            )
-
-            Button(
-                onClick = {
-//                    val bitmap = BitmapFactory.decodeResource(
+        Button(
+            onClick = {
+                when (selectedItemType) {
+                    AISearchTypeEnum.GEMINI -> {
+                        //                    val bitmap = BitmapFactory.decodeResource(
 //                        context.resources,
 //                        images[selectedImage.intValue]
 //                    )
-                    aiSearchViewModel.sendGeminiPrompt(
-//                        bitmap,
-                        prompt = prompt
-                    )
 
-                    aiSearchViewModel.sendChatGptPrompt(
-                        prompt = prompt
-                    )
-                },
-                enabled = prompt.isNotEmpty(),
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-            ) {
-//                Icon(
-//                    imageVector = icon[2],
-//                    contentDescription = ""
-//                )
-                Text(text = stringResource(R.string.action_go))
-            }
+                        aiSearchViewModel.sendGeminiPrompt(
+//                        bitmap,
+                            prompt = prompt
+                        )
+                    }
+
+                    AISearchTypeEnum.CHATGPT ->
+                        aiSearchViewModel.sendChatGptPrompt(
+                            prompt = prompt
+                        )
+
+                    AISearchTypeEnum.GROK ->
+                        aiSearchViewModel.sendGrokPrompt(
+                            prompt = prompt
+                        )
+
+                    AISearchTypeEnum.DEEPSEEK ->
+                        aiSearchViewModel.sendDeepSeekPrompt(
+                            prompt = prompt
+                        )
+
+                    else -> listOf(BlueGray900)
+                }
+
+
+            },
+            enabled = prompt.isNotEmpty(),
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = stringResource(R.string.action_go))
         }
 
         when (uiState) {

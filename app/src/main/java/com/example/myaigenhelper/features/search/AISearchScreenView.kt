@@ -24,12 +24,8 @@ import com.example.myaigenhelper.ui.styles.chatGptColorList
 import com.example.myaigenhelper.ui.styles.deepSeekColorList
 import com.example.myaigenhelper.ui.styles.geminiColorList
 import com.example.myaigenhelper.ui.styles.grokColorList
-import com.example.myaigenhelper.ui.theme.BlueGray800
 import com.example.myaigenhelper.ui.theme.BlueGray900
-import com.example.myaigenhelper.ui.theme.DeepPurpleA400
-import com.example.myaigenhelper.ui.theme.Gray900
 import com.example.myaigenhelper.ui.theme.MyAIGenHelperTheme
-import com.example.myaigenhelper.ui.theme.Shadow11
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -91,8 +87,9 @@ fun AISearchingScreenView() {
             },
             hasDragHandle = true,
         ) {
-            AISearchInputView(
-                modifier = Modifier
+             AISearchInputView(
+                 modifier = Modifier,
+                selectedItemType = selectedItem.value?.id ?: AISearchTypeEnum.GEMINI,
             )
         }
     }

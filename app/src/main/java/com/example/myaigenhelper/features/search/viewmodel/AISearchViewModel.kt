@@ -55,28 +55,42 @@ class AISearchViewModel : ViewModel() {
     }
 
     // Configures using the `OPENAI_API_KEY`, `OPENAI_ORG_ID` and `OPENAI_PROJECT_ID`
+    // credential` is required
     // environment variables
-    fun sendChatGptPrompt(prompt: String) {
-        val client = OpenAIOkHttpClient.fromEnv()
-        viewModelScope.launch(context = Dispatchers.IO) {
-            //params
-            val params = ChatCompletionCreateParams.builder()
-                .addUserMessage(prompt)
-                .model(ChatModel.GPT_4O_2024_05_13)
-                .build()
-            //ask to chatgpt and take first chioice
-            client.chat()
-                .completions()
-                .create(params)
-                .choices()[0]
-                .message()
-                .content()
-                .getOrNull()
-                ?.takeIf { it.isNotEmpty() }
-                ?.let { outputContent ->
-                    uiStateMutable.value = UiState.Success(outputContent)
-                }
+    fun sendGrokPrompt(prompt: String) {
+        uiStateMutable.value = UiState.Success("NOT IMPLEMENTED")
+    }
 
+    fun sendDeepSeekPrompt(prompt: String) {
+        uiStateMutable.value = UiState.Success("NOT IMPLEMENTED")
+    }
+
+    fun sendChatGptPrompt(prompt: String) {
+        try {
+            val client = OpenAIOkHttpClient
+                .fromEnv()
+            viewModelScope.launch(context = Dispatchers.IO) {
+                //params
+                val params = ChatCompletionCreateParams.builder()
+                    .addUserMessage(prompt)
+                    .model(ChatModel.GPT_4O_2024_05_13)
+                    .build()
+                //ask to chatgpt and take first chioice
+                client.chat()
+                    .completions()
+                    .create(params)
+                    .choices()[0]
+                    .message()
+                    .content()
+                    .getOrNull()
+                    ?.takeIf { it.isNotEmpty() }
+                    ?.let { outputContent ->
+                        uiStateMutable.value = UiState.Success(outputContent)
+                    }
+            }
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+            uiStateMutable.value = UiState.Error(e.localizedMessage ?: "ERROR ChatGPT")
         }
     }
 }
