@@ -1,11 +1,14 @@
+import org.jetbrains.kotlin.cli.js.klib.TopDownAnalyzerFacadeForJSIR.platform
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("com.google.gms.google-services")
 }
 android {
-    namespace = "com.example.myaigenhelper"
+    namespace = "com.application.example.myaigenhelper"
     compileSdk = 35
 
     packaging {
@@ -15,7 +18,7 @@ android {
 
     }
     defaultConfig {
-        applicationId = "com.example.myaigenhelper"
+        applicationId = "com.application.sample.davelmn.myaigenhelper"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -70,6 +73,17 @@ dependencies {
     // tbd
     implementation(libs.font.awesome.android)
 
+    // Import the Firebase BoM
+    // import firebase
+    implementation(platform(libs.firebase.bom))
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation(libs.firebase.analytics)
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

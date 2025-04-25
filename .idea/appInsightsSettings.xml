@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.application.sample.davelmn.myaigenhelper" />
+                  <option name="mobileSdkAppId" value="1:388328169033:android:bce89dbfc77fe93c84a998" />
+                  <option name="projectId" value="get-out-of-work" />
+                  <option name="projectNumber" value="388328169033" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -327,7 +327,7 @@ val Shadow1 = Color(0xffded6fe)
 val Shadow0 = Color(0xfff4f2ff)
 
 //gemini
-val GeminiBlue = Color(0xff4796E3)
+val GeminiBlue = Color(0xff123a73)
 val GeminiBlueDark = Color(0xFF4F5970)
 val GeminiViolet = Color(0xff9177C7)
 val GeminiVioletDark = Color(0xFF5A5273)

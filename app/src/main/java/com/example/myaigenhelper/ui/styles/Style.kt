@@ -101,11 +101,11 @@ fun Modifier.meshBackgroundColors(
 
 val geminiColorList = listOf<Color>(
     GeminiBlue,
-    GeminiBlueDark,
-    GeminiViolet,
-    GeminiVioletDark,
-    GeminiFucsia,
-    GeminiFucsiaDark,
+//    GeminiBlueDark,
+//    GeminiViolet,
+//    GeminiVioletDark,
+//    GeminiFucsia,
+//    GeminiFucsiaDark,
 )
 val aiColorList = listOf<Color>(
 //    GeminiBlue,

@@ -1,7 +1,7 @@
 package com.example.myaigenhelper.application
 
 import android.app.Application
-import com.example.myaigenhelper.BuildConfig.DEBUG
+import com.application.example.myaigenhelper.BuildConfig.DEBUG
 import timber.log.Timber
 
 class MyAiGenHelperApplication() : Application() {

@@ -3,7 +3,7 @@ package com.example.myaigenhelper.features.search.viewmodel
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myaigenhelper.BuildConfig
+import com.application.example.myaigenhelper.BuildConfig
 import com.example.myaigenhelper.features.search.state.UiState
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "388328169033",
+    "firebase_url": "https://get-out-of-work.firebaseio.com",
+    "project_id": "get-out-of-work",
+    "storage_bucket": "get-out-of-work.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388328169033:android:bce89dbfc77fe93c84a998",
+        "android_client_info": {
+          "package_name": "com.application.sample.davelmn.myaigenhelper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhutVxNJikoDeiSNhZ2Squ8uRTE6Z26cU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

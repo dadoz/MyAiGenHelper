@@ -1,6 +1,6 @@
 package com.example.myaigenhelper.features.search
 
-import com.example.myaigenhelper.R
+import com.application.example.myaigenhelper.R
 import com.example.myaigenhelper.features.search.data.AISearch
 import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
 

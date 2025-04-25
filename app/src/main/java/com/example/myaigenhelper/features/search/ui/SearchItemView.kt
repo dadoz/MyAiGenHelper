@@ -17,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myaigenhelper.R
+import com.application.example.myaigenhelper.R
 import com.example.myaigenhelper.ui.theme.DarkGrayTransparent
 import com.example.myaigenhelper.ui.theme.MyAIGenHelperTheme
 import com.example.myaigenhelper.ui.theme.White

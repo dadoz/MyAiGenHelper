@@ -1,18 +1,16 @@
 package com.example.myaigenhelper.features.search
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetDefaults.DragHandle
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -30,23 +28,19 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myaigenhelper.R
+import com.application.example.myaigenhelper.R
 import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.modalImeAndStatusBarPadding
 import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
-import com.example.myaigenhelper.ui.styles.angleCircleAnimated
-import com.example.myaigenhelper.ui.styles.multicolorBackgroundAnimated
-import com.example.myaigenhelper.ui.theme.BlueGray900
+import com.example.myaigenhelper.ui.theme.Gray900
 import kotlin.random.Random
 
 const val densityResizeFactor = .9f
@@ -200,23 +194,26 @@ fun AISearchInputView(
                         aiSearchViewModel.sendDeepSeekPrompt(
                             prompt = prompt
                         )
-
-                    else -> listOf(BlueGray900)
                 }
-
-
             },
+            colors = ButtonColors(
+                containerColor = Gray900,
+                contentColor = MaterialTheme.colorScheme.primary,
+                disabledContainerColor = MaterialTheme.colorScheme.primary,
+                disabledContentColor = MaterialTheme.colorScheme.primary
+            ),
             enabled = prompt.isNotEmpty(),
             modifier = Modifier
                 .padding(vertical = 16.dp)
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
         ) {
-            Text(text = stringResource(R.string.action_go))
+            Text(
+                text = stringResource(R.string.action_go)
+            )
         }
 
         when (uiState) {
-
             is UiState.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier
@@ -235,38 +232,6 @@ fun AISearchInputView(
                         .fillMaxSize()
                         .verticalScroll(scrollState)
                 )
-        }
-    }
-}
-
-@Composable
-fun SampleBackgroundAnimated() {
-    val colorBg = Color(0xFF2C3141)
-    val angle by angleCircleAnimated()
-    val colors =
-        listOf(
-            Color(0xFFFF595A),
-            Color(0xFFFFC766),
-            Color(0xFF35A07F),
-            Color(0xFF35A07F),
-            Color(0xFFFFC766),
-            Color(0xFFFF595A)
-        )
-
-    val brush = multicolorBackgroundAnimated(colors = colors)
-    Canvas(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .background(colorBg)
-    ) {
-
-        rotate(degrees = angle) {
-            drawCircle(
-                brush = brush,
-                radius = size.width,
-                blendMode = BlendMode.SrcIn,
-            )
         }
     }
 }
