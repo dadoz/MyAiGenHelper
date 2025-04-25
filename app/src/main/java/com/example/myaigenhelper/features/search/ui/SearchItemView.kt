@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,7 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myaigenhelper.R
+import com.example.myaigenhelper.ui.theme.DarkGrayTransparent
 import com.example.myaigenhelper.ui.theme.MyAIGenHelperTheme
+import com.example.myaigenhelper.ui.theme.White
 
 @Composable
 fun SearchItemView(
@@ -29,6 +32,12 @@ fun SearchItemView(
     Card(
         modifier = modifier
             .fillMaxWidth(),
+        colors = CardColors(
+            containerColor = DarkGrayTransparent,
+            contentColor = White,
+            disabledContainerColor = DarkGrayTransparent,
+            disabledContentColor = White,
+        ),
         shape = RoundedCornerShape(32.dp)
     ) {
         Row(

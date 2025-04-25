@@ -1,11 +1,6 @@
 package com.example.myaigenhelper.features.search
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.EaseInOut
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -27,10 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -54,7 +47,6 @@ import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
 import com.example.myaigenhelper.ui.styles.angleCircleAnimated
 import com.example.myaigenhelper.ui.styles.multicolorBackgroundAnimated
 import com.example.myaigenhelper.ui.theme.BlueGray900
-import kotlinx.coroutines.delay
 import kotlin.random.Random
 
 const val densityResizeFactor = .9f
@@ -70,21 +62,22 @@ fun ModalBottomSheetView(
     hasDragHandle: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val animationTimestamp = remember { mutableLongStateOf(System.currentTimeMillis()) }
-    LaunchedEffect(key1 = animationTimestamp.longValue) {
-        delay(1000)
-        animationTimestamp.longValue = System.currentTimeMillis()
-    }
-    val animatedColor by animateColorAsState(
-        targetValue = containerColorList
-            .let { colors ->
-                colors[Random(animationTimestamp.longValue).nextInt(0, colors.size)]
-            },
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1000, easing = EaseInOut),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
+//    val animationTimestamp = remember { mutableLongStateOf(System.currentTimeMillis()) }
+//    val animatedColor by animateColorAsState(
+//        targetValue = containerColorList
+//            .let { colors ->
+//                colors[Random(animationTimestamp.longValue).nextInt(0, colors.size)]
+//            },
+//        animationSpec = infiniteRepeatable(
+//            animation = tween(durationMillis = 1000, easing = EaseInOut),
+//            repeatMode = RepeatMode.Reverse
+//        )
+//    )
+
+//    LaunchedEffect(key1 = animationTimestamp.longValue) {
+//        delay(1000)
+//        animationTimestamp.longValue = System.currentTimeMillis()
+//    }
 
     ModalBottomSheet(
         modifier = modifier
@@ -93,7 +86,10 @@ fun ModalBottomSheetView(
             ),
         sheetState = bottomSheetState,
         onDismissRequest = onCloseCallback,
-        containerColor = animatedColor,
+        containerColor = containerColorList[Random(System.currentTimeMillis()).nextInt(
+            0,
+            containerColorList.size
+        )],
         dragHandle = {
             if (hasDragHandle) {
                 DragHandle()
