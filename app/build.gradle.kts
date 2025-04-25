@@ -62,14 +62,13 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.generativeai)
     testImplementation(libs.junit)
+    // gemini
 
     //timber log
     implementation(libs.timber)
 
     // chatgpt
     implementation(libs.openai.java)
-    // gemini
-
     // tbd
     implementation(libs.font.awesome.android)
 

@@ -3,5 +3,6 @@
 
     <style name="Theme.MyAIGenHelper" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
+
     </style>
 </resources>

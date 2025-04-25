@@ -1,8 +1,5 @@
 package com.example.myaigenhelper.ui.styles
 
-//import com.example.myaigenhelper.ui.theme.GeminiBlueDark
-//import com.example.myaigenhelper.ui.theme.GeminiFucsiaDark
-//import com.example.myaigenhelper.ui.theme.GeminiVioletDark
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -32,11 +29,6 @@ import com.example.myaigenhelper.ui.theme.DeepSeek3
 import com.example.myaigenhelper.ui.theme.DeepSeek4
 import com.example.myaigenhelper.ui.theme.DeepSeek5
 import com.example.myaigenhelper.ui.theme.GeminiBlue
-import com.example.myaigenhelper.ui.theme.GeminiBlueDark
-import com.example.myaigenhelper.ui.theme.GeminiFucsia
-import com.example.myaigenhelper.ui.theme.GeminiFucsiaDark
-import com.example.myaigenhelper.ui.theme.GeminiViolet
-import com.example.myaigenhelper.ui.theme.GeminiVioletDark
 import com.example.myaigenhelper.ui.theme.Gray700
 import com.example.myaigenhelper.ui.theme.Gray800
 import com.example.myaigenhelper.ui.theme.Gray900

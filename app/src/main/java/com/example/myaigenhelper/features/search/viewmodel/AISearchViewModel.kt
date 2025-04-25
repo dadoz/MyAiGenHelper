@@ -8,6 +8,7 @@ import com.example.myaigenhelper.features.search.state.UiState
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import com.openai.client.okhttp.OpenAIOkHttpClient
+import com.openai.errors.RateLimitException
 import com.openai.models.ChatModel
 import com.openai.models.chat.completions.ChatCompletionCreateParams
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +24,26 @@ class AISearchViewModel : ViewModel() {
     val uiState: StateFlow<UiState> =
         uiStateMutable.asStateFlow()
 
+    private val openAIGenerativeModelClient by lazy {
+        try {
+            OpenAIOkHttpClient
+                .builder()
+                .apiKey(apiKey = BuildConfig.OPEN_AI_API_KEY)
+                .build()
+        } catch (e: IllegalStateException) {
+            e.printStackTrace()
+            uiStateMutable.value = UiState.Error(e.localizedMessage ?: "Error Initialize ChatGPT")
+            null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            uiStateMutable.value = UiState.Error(e.localizedMessage ?: "Generic Error ChatGPT")
+            null
+        }
+    }
+
     private val generativeModel = GenerativeModel(
         modelName = "gemini-1.5-flash",
-        apiKey = BuildConfig.apiKey
+        apiKey = BuildConfig.GEMINI_API_KEY
     )
 
     fun sendGeminiPrompt(
@@ -66,31 +84,40 @@ class AISearchViewModel : ViewModel() {
     }
 
     fun sendChatGptPrompt(prompt: String) {
-        try {
-            val client = OpenAIOkHttpClient
-                .fromEnv()
-            viewModelScope.launch(context = Dispatchers.IO) {
+        uiStateMutable.value = UiState.Loading
+        viewModelScope.launch(context = Dispatchers.IO) {
+            try {
                 //params
                 val params = ChatCompletionCreateParams.builder()
                     .addUserMessage(prompt)
                     .model(ChatModel.GPT_4O_2024_05_13)
                     .build()
                 //ask to chatgpt and take first chioice
-                client.chat()
-                    .completions()
-                    .create(params)
-                    .choices()[0]
-                    .message()
-                    .content()
-                    .getOrNull()
-                    ?.takeIf { it.isNotEmpty() }
-                    ?.let { outputContent ->
-                        uiStateMutable.value = UiState.Success(outputContent)
+                openAIGenerativeModelClient
+                    ?.let {
+                        it.chat()
+                            .completions()
+                            .create(params)
+                            .choices()[0]
+                            .message()
+                            .content()
+                            .getOrNull()
+                            ?.takeIf { it.isNotEmpty() }
+                            ?.let { outputContent ->
+                                uiStateMutable.value = UiState.Success(outputContent)
+                            }
                     }
+                    ?: run {
+                        throw Exception("CHATGPT - No More search")
+                    }
+            } catch (e: RateLimitException) {
+                e.printStackTrace()
+                uiStateMutable.value = UiState.Error(e.localizedMessage ?: "No More search")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                uiStateMutable.value =
+                    UiState.Error(e.localizedMessage ?: "Generic Error ChatGPT")
             }
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-            uiStateMutable.value = UiState.Error(e.localizedMessage ?: "ERROR ChatGPT")
         }
     }
 }

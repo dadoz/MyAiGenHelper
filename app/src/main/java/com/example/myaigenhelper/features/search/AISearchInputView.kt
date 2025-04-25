@@ -15,9 +15,10 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -40,6 +41,7 @@ import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.modalImeAndStatusBarPadding
 import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
+import com.example.myaigenhelper.ui.theme.DarkGrayTransparent
 import com.example.myaigenhelper.ui.theme.Gray900
 import kotlin.random.Random
 
@@ -153,16 +155,19 @@ fun AISearchInputView(
             .fillMaxSize()
             .padding(all = 16.dp)
     ) {
-        TextField(
+        OutlinedTextField(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(end = 16.dp)
                 .align(Alignment.CenterHorizontally),
             value = prompt,
-            label = {
-                Text(stringResource(R.string.label_prompt))
-            },
             onValueChange = { prompt = it },
             minLines = 10,
+            colors = OutlinedTextFieldDefaults.colors()
+                .copy(
+                    focusedContainerColor = DarkGrayTransparent,
+                    unfocusedContainerColor = DarkGrayTransparent,
+                )
         )
 
         Button(
