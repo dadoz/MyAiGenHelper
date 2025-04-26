@@ -1,6 +1,6 @@
 package com.example.myaigenhelper.features.search.aimodel
 
-import com.example.myaigenhelper.features.search.data.XaiService
+import com.example.myaigenhelper.features.search.data.services.XaiService
 import com.example.myaigenhelper.features.search.data.model.ChatRequest
 import com.example.myaigenhelper.features.search.data.model.ChatResponse
 import com.example.myaigenhelper.network.retrofitOpenAI

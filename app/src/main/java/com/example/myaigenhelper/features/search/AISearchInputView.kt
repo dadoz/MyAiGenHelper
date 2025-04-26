@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.application.example.myaigenhelper.R
-import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
+import com.example.myaigenhelper.features.search.data.model.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.modalImeAndStatusBarPadding
 import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel

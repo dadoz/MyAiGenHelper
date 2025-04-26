@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myaigenhelper.features.search.data.AISearch
-import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
+import com.example.myaigenhelper.features.search.data.model.AISearch
+import com.example.myaigenhelper.features.search.data.model.AISearchTypeEnum
 import com.example.myaigenhelper.features.search.helper.expandedBottomSheetState
 import com.example.myaigenhelper.features.search.ui.SearchItemView
 import com.example.myaigenhelper.ui.styles.aiColorList

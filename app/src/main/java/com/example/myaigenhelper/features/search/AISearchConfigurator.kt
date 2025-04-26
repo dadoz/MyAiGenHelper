@@ -1,8 +1,8 @@
 package com.example.myaigenhelper.features.search
 
 import com.application.example.myaigenhelper.R
-import com.example.myaigenhelper.features.search.data.AISearch
-import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
+import com.example.myaigenhelper.features.search.data.model.AISearch
+import com.example.myaigenhelper.features.search.data.model.AISearchTypeEnum
 
 val aiSearchItemList = listOf(
     AISearch(

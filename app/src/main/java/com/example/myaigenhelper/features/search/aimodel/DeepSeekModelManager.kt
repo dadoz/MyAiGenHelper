@@ -1,6 +1,6 @@
 package com.example.myaigenhelper.features.search.aimodel
 
-import com.example.myaigenhelper.features.search.data.DeepSeekService
+import com.example.myaigenhelper.features.search.data.services.DeepSeekService
 import com.example.myaigenhelper.features.search.data.model.ChatRequest
 import com.example.myaigenhelper.features.search.data.model.ChatResponse
 import com.example.myaigenhelper.network.retrofitDeepSeek

@@ -1,4 +1,4 @@
-package com.example.myaigenhelper.features.search.data
+package com.example.myaigenhelper.features.search.data.services
 
 import com.application.example.myaigenhelper.BuildConfig
 import com.example.myaigenhelper.features.search.data.model.ChatRequest

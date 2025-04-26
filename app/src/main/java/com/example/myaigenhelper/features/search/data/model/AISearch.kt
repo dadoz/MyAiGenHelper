@@ -1,4 +1,4 @@
-package com.example.myaigenhelper.features.search.data
+package com.example.myaigenhelper.features.search.data.model
 
 import androidx.annotation.Keep
 
