@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.cli.js.klib.TopDownAnalyzerFacadeForJSIR.platform
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -69,8 +67,6 @@ dependencies {
 
     // chatgpt
     implementation(libs.openai.java)
-    // tbd
-    implementation(libs.font.awesome.android)
 
     // Import the Firebase BoM
     // import firebase
@@ -85,7 +81,7 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
-    
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

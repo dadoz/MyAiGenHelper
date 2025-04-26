@@ -66,23 +66,6 @@ fun ModalBottomSheetView(
     hasDragHandle: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
-//    val animationTimestamp = remember { mutableLongStateOf(System.currentTimeMillis()) }
-//    val animatedColor by animateColorAsState(
-//        targetValue = containerColorList
-//            .let { colors ->
-//                colors[Random(animationTimestamp.longValue).nextInt(0, colors.size)]
-//            },
-//        animationSpec = infiniteRepeatable(
-//            animation = tween(durationMillis = 1000, easing = EaseInOut),
-//            repeatMode = RepeatMode.Reverse
-//        )
-//    )
-
-//    LaunchedEffect(key1 = animationTimestamp.longValue) {
-//        delay(1000)
-//        animationTimestamp.longValue = System.currentTimeMillis()
-//    }
-
     ModalBottomSheet(
         modifier = modifier
             .modalImeAndStatusBarPadding(
@@ -156,7 +139,6 @@ fun AISearchInputView(
             }
         )
     }
-//    val icon = remember { FontAwesomeIcons.AllIcons.take(10) }
 
     Column(
         modifier = modifier
