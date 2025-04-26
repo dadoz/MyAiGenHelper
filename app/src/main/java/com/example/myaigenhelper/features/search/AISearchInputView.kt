@@ -1,5 +1,6 @@
 package com.example.myaigenhelper.features.search
 
+import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -7,10 +8,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BottomSheetDefaults.DragHandle
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -33,8 +37,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.application.example.myaigenhelper.R
 import com.example.myaigenhelper.features.search.data.AISearchTypeEnum
@@ -43,6 +49,8 @@ import com.example.myaigenhelper.features.search.state.UiState
 import com.example.myaigenhelper.features.search.viewmodel.AISearchViewModel
 import com.example.myaigenhelper.ui.theme.DarkGrayTransparent
 import com.example.myaigenhelper.ui.theme.Gray900
+import com.example.myaigenhelper.ui.theme.MyAIGenHelperTheme
+import com.example.myaigenhelper.ui.theme.White
 import kotlin.random.Random
 
 const val densityResizeFactor = .9f
@@ -124,7 +132,7 @@ fun AISearchInputView(
     val placeholderPrompt = stringResource(R.string.prompt_placeholder)
     val placeholderResult = stringResource(R.string.results_placeholder)
 
-    var prompt by rememberSaveable { mutableStateOf(placeholderPrompt) }
+    var prompt by rememberSaveable { mutableStateOf("") }
     val scrollState = rememberScrollState()
     val errorColor = MaterialTheme.colorScheme.error
     val surfaceColor = MaterialTheme.colorScheme.onSurface
@@ -155,26 +163,56 @@ fun AISearchInputView(
             .fillMaxSize()
             .padding(all = 16.dp)
     ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 16.dp)
-                .align(Alignment.CenterHorizontally),
-            value = prompt,
-            onValueChange = { prompt = it },
-            minLines = 10,
-            colors = OutlinedTextFieldDefaults.colors()
-                .copy(
-                    focusedContainerColor = DarkGrayTransparent,
-                    unfocusedContainerColor = DarkGrayTransparent,
+        Card(
+            modifier = modifier
+                .fillMaxWidth(),
+            colors = CardDefaults.cardColors().copy(
+                containerColor = DarkGrayTransparent,
+                contentColor = White,
+                disabledContainerColor = DarkGrayTransparent,
+                disabledContentColor = White,
+            ),
+            shape = RoundedCornerShape(32.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+
+            ) {
+
+                Text(
+                    modifier = Modifier
+                        .padding(bottom = 16.dp),
+                    fontSize = 26.sp,
+                    text = "New Search!"
                 )
-        )
+
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                        .align(Alignment.CenterHorizontally),
+                    label = {
+                        Text(
+                            modifier = Modifier,
+                            text = placeholderPrompt
+                        )
+                    },
+                    value = prompt,
+                    onValueChange = {
+                        prompt = it
+                    },
+                    minLines = 10,
+                    colors = OutlinedTextFieldDefaults.colors()
+                )
+            }
+        }
 
         Button(
             onClick = {
                 when (selectedItemType) {
                     AISearchTypeEnum.GEMINI -> {
-                        //                    val bitmap = BitmapFactory.decodeResource(
+//                    val bitmap = BitmapFactory.decodeResource(
 //                        context.resources,
 //                        images[selectedImage.intValue]
 //                    )
@@ -201,12 +239,11 @@ fun AISearchInputView(
                         )
                 }
             },
-            colors = ButtonColors(
-                containerColor = Gray900,
-                contentColor = MaterialTheme.colorScheme.primary,
-                disabledContainerColor = MaterialTheme.colorScheme.primary,
-                disabledContentColor = MaterialTheme.colorScheme.primary
-            ),
+            colors = ButtonDefaults.buttonColors()
+                .copy(
+                    containerColor = Gray900,
+                    contentColor = White
+                ),
             enabled = prompt.isNotEmpty(),
             modifier = Modifier
                 .padding(vertical = 16.dp)
@@ -220,10 +257,25 @@ fun AISearchInputView(
 
         when (uiState) {
             is UiState.Loading -> {
-                CircularProgressIndicator(
+                Column(
                     modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                )
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Just having your search",
+                        textAlign = TextAlign.Start,
+                        color = textColor,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(16.dp)
+                            .verticalScroll(scrollState)
+                    )
+
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
             }
 
             else ->
@@ -238,5 +290,17 @@ fun AISearchInputView(
                         .verticalScroll(scrollState)
                 )
         }
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+fun AISearchInputViewPreview() {
+    MyAIGenHelperTheme {
+        AISearchInputView(
+            modifier = Modifier,
+            selectedItemType = AISearchTypeEnum.GEMINI
+        )
     }
 }
