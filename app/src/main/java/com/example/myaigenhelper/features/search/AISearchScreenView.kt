@@ -3,10 +3,8 @@ package com.example.myaigenhelper.features.search
 import android.content.res.Configuration
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationVector4D
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myaigenhelper.features.search.data.model.AISearch
@@ -38,7 +35,6 @@ import com.example.myaigenhelper.ui.theme.BlueGray900
 import com.example.myaigenhelper.ui.theme.MyAIGenHelperTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,22 +47,22 @@ fun AISearchingScreenView() {
     val leftColor = remember { Animatable(initialValue = aiColorList[0]) }
     val middleColor = remember { Animatable(initialValue = aiColorList[1]) }
     val rightColor = remember { Animatable(initialValue = aiColorList[2]) }
-    LaunchedEffect(Unit) {
-
-        fun animate(color: Animatable<Color, AnimationVector4D>) {
-            launch {
-                while (true) {
-                    color.animateTo(
-                        targetValue = aiColorList.random(),
-                        animationSpec = tween(
-                            durationMillis = Random.nextInt(300, 500)
-                        )
-                    )
-                }
-            }
-        }
-        listOf(leftColor, middleColor, rightColor).map { animate(it) }
-    }
+    //TODO take tooo much time on EGL smthing wrong with animation
+//    LaunchedEffect(Unit) {
+//        fun animate(color: Animatable<Color, AnimationVector4D>) {
+//            launch {
+//                while (true) {
+//                    color.animateTo(
+//                        targetValue = aiColorList.random(),
+//                        animationSpec = tween(
+//                            durationMillis = DefaultDurationMillis
+//                        )
+//                    )
+//                }
+//            }
+//        }
+//        listOf(leftColor, middleColor, rightColor).map { animate(it) }
+//    }
 
     val animatedPoint = remember { Animatable(.8f) }
     LaunchedEffect(Unit) {

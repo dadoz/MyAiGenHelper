@@ -28,5 +28,11 @@ val aiSearchItemList = listOf(
         imageResource = R.drawable.ic_deepseek,
         title = "DeepSeek",
         description = "to handle just choice the task"
+    ),
+    AISearch(
+        id = AISearchTypeEnum.LLAMA,
+        imageResource = R.drawable.ic_meta,
+        title = "Llama Meta AI",
+        description = "to handle just choice the task"
     )
 )

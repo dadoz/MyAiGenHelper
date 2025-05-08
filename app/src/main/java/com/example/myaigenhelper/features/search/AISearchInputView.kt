@@ -219,6 +219,8 @@ fun AISearchInputView(
                         aiSearchViewModel.sendDeepSeekPrompt(
                             prompt = prompt
                         )
+
+                    AISearchTypeEnum.LLAMA -> { }
                 }
             },
             colors = ButtonDefaults.buttonColors()

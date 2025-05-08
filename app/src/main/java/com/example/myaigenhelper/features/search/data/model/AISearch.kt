@@ -15,5 +15,6 @@ enum class AISearchTypeEnum(val value: String) {
     GEMINI(value = "GEMINI"),
     CHATGPT(value = "CHATGPT"),
     GROK(value = "GROK"),
-    DEEPSEEK(value = "DEEPSEEK")
+    DEEPSEEK(value = "DEEPSEEK"),
+    LLAMA(value = "LLAMA"),
 }
