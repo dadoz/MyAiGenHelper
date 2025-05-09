@@ -19,13 +19,8 @@ android {
         applicationId = "com.application.sample.davelmn.myaigenhelper"
         minSdk = 24
         targetSdk = 35
-<<<<<<< Updated upstream
-        versionCode = 1
-=======
         versionCode = 202509050
->>>>>>> Stashed changes
         versionName = "0.1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

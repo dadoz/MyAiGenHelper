@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -47,6 +48,7 @@ fun SearchItemView(
         ) {
             Image(
                 modifier = Modifier
+                    .size(size = 64.dp)
                     .padding(end = 16.dp),
                 painter = painterResource(id = imageResource),
                 contentDescription = "item",
